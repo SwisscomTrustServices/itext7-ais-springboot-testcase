@@ -1,0 +1,44 @@
+swisscom:
+  ais-client:
+    # The license file path. Also, env placeholder is supported (e.g. ${AIS-PRIVATE-KEY-SECRET})
+    license.file: ${ITEXT_LICENSE_FILE_PATH}
+    server:
+      # The AIS server REST URL for sending the Signature requests
+      rest.signUrl: https://ais.swisscom.com/AIS-Server/rs/v1.0/sign
+      # The AIS server REST URL for sending the Signature status poll requests (Pending requests)
+      rest.pendingUrl: https://ais.swisscom.com/AIS-Server/rs/v1.0/pending
+    client:
+      # The maximum number of connections that the HTTP client used by the AIS client can create and reuse simultaneously
+      http.maxTotalConnections: 20
+      # The maximum number of connections PER ROUTE that the HTTP client used by the AIS client can use
+      http.maxConnectionsPerRoute: 10
+      # The HTTP connection timeout in SECONDS (the maximum time allowed for the HTTP client to wait for the TCP socket connection
+      # to be established until the request is dropped and the client gives up).
+      http.connectionTimeoutInSeconds: 10
+      # The HTTP response timeout in SECONDS (the maximum time allowed for the HTTP client to wait for the response to be received
+      # for any one request until the request is dropped and the client gives up).
+      http.responseTimeoutInSeconds: 20
+      # The interval IN SECONDS for the client to poll for signature status (for each parallel request).
+      poll.intervalInSeconds: 10
+      # The total number of rounds (including the first Pending request) that the client runs for each parallel request. After this
+      # number of rounds of calling the Pending endpoint for an ongoing request, the client gives up and signals a timeout for that
+      # respective request.
+      poll.rounds: 10
+    signature:
+      # The standard to use for creating the signature.
+      # Choose from: DEFAULT, CAdES, PDF, PAdES, PAdES-Baseline, PLAIN.
+      # Leave it empty and the client will use sensible defaults.
+      standard: PAdES-Baseline
+      # The type and method of revocation information to receive from the server.
+      # Choose from: DEFAULT, CAdES, PDF, PAdES, PAdES-Baseline, BOTH, PLAIN.
+      # Leave it empty and the client will use sensible defaults.
+      revocationInformation:
+      # Whether to add a timestamp to the signature or not. Default is true.
+      # Leave it empty and the client will use sensible defaults.
+      addTimestamp: true
+      # The AIS Claimed Identity name. The right Claimed Identity (and key, see below) must be used for the right signature type.
+      claimedIdentityName: ais-90days-trial
+      # The AIS Claimed Identity key. The key together with the name (see above) is used for starting the correct signature type.
+      claimedIdentityKey: OnDemand-Advanced
+      # Specially created for this PoC
+      staticClaimedIdentityKey: static-saphir4-eu

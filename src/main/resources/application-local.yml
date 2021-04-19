@@ -1,0 +1,34 @@
+swisscom:
+  ais-client:
+    server:
+      # The AIS server trusted CA certificate file
+      cert.file: C:\\Projects\\Swisscom\\files\\ais-ca-ssl\\ais-ca-ssl.crt
+    client:
+      # The client's private key file (corresponding to the public key attached to the client's certificate)
+      auth.keyFile: C:\\Projects\\Swisscom\\files\\paul-ais.key
+      # The password of the client's private key. This can be left blank if the private key is not protected with a password
+      # Also, env placeholder is supported (e.g. ${AIS-PRIVATE-KEY-SECRET}).
+      auth.keyPassword: ${AIS-PRIVATE-KEY-SECRET}
+      # The client's certificate file
+      cert.file: C:\\Projects\\Swisscom\\files\\paul-ais.crt
+    signature:
+      # The client's Subject DN to which the certificate is bound.
+      distinguishedName: "cn=TEST Paul Stoia, givenname=Paul, surname=Stoia, c=RO, emailaddress=paul.stoia@nagarro.com"
+      # The language (one of "en", "fr", "de", "it") to be used during the Step Up interaction with the mobile user.
+      stepUp:
+        language: en
+        # The MSISDN (in international format) of the mobile user to interact with during the Step Up phase.
+        msisdn: 40751557122
+        # The message to present to the mobile user during the Step Up phase.
+        message: Please confirm the signing of the document
+        # The mobile user's Serial Number to validate during the Step Up phase. If this number is different than the one registered on the server
+        # side for the mobile user, the request will fail.
+        serialNumber:
+      # The name to embed in the signature to be created.
+      name: TEST Signer
+      # The reason for this signature to be created.
+      reason: Testing signature
+      # The location where the signature is created.
+      location: Testing location
+      # The contact info to embed in the signature to be created.
+      contactInfo: tester.test@test.com
