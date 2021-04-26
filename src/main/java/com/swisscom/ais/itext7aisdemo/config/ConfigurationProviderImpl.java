@@ -1,6 +1,6 @@
 package com.swisscom.ais.itext7aisdemo.config;
 
-import com.swisscom.ais.itext7.client.common.provider.ConfigurationProvider;
+import com.swisscom.ais.itext7.client.config.ConfigurationProvider;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 

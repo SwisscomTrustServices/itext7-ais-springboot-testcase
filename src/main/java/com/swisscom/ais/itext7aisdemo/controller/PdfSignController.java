@@ -4,7 +4,7 @@ import com.swisscom.ais.itext7.client.AisClient;
 import com.swisscom.ais.itext7.client.model.PdfMetadata;
 import com.swisscom.ais.itext7.client.model.SignatureMode;
 import com.swisscom.ais.itext7.client.model.UserData;
-import com.swisscom.ais.itext7.client.service.SigningService;
+import com.swisscom.ais.itext7.client.utils.ClientUtils;
 import com.swisscom.ais.itext7aisdemo.dto.SignatureResultResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -27,30 +27,28 @@ import java.util.stream.Collectors;
 public class PdfSignController {
 
   private final AisClient aisClient;
-  private final SigningService signingService;
 
   private final UserData userData;
   private final UserData staticUserData;
 
-  public PdfSignController(AisClient aisClient, SigningService signingService, @Qualifier("OnDemandUserData") UserData userData,
+  public PdfSignController(AisClient aisClient, @Qualifier("OnDemandUserData") UserData userData,
                            @Qualifier("StaticUserData") UserData staticUserData) {
     this.aisClient = aisClient;
-    this.signingService = signingService;
     this.userData = userData;
     this.staticUserData = staticUserData;
   }
 
   @PostMapping("/on-demand-step-up-file")
-  public SignatureResultResponse signOnDemandStepUpFileWithClient(@RequestParam String inputFilePath, @RequestParam String outputFilePath) throws FileNotFoundException {
+  public SignatureResultResponse signOnDemandStepUpFile(@RequestParam String inputFilePath, @RequestParam String outputFilePath) throws FileNotFoundException {
     PdfMetadata pdfMetadata = new PdfMetadata(new FileInputStream(inputFilePath), new FileOutputStream(outputFilePath));
     return new SignatureResultResponse(aisClient.signWithOnDemandCertificateAndStepUp(Collections.singletonList(pdfMetadata), userData));
   }
 
   @PostMapping(value = "/static-multipart", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_PDF_VALUE)
-  public ResponseEntity<String> signStaticMultipartWithService(@RequestParam MultipartFile inputFile) throws IOException {
+  public ResponseEntity<String> signStaticMultipart(@RequestParam MultipartFile inputFile) throws IOException {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     PdfMetadata pdfMetadata = new PdfMetadata(inputFile.getInputStream(), outputStream);
-    signingService.performSignings(Collections.singletonList(pdfMetadata), SignatureMode.STATIC, staticUserData);
+    aisClient.signWithStaticCertificate(Collections.singletonList(pdfMetadata), staticUserData);
     String encodedDocument = Base64.getEncoder().encodeToString(outputStream.toByteArray());
     return ResponseEntity.ok()
                          .contentType(MediaType.APPLICATION_PDF)
@@ -58,19 +56,19 @@ public class PdfSignController {
   }
 
   @PostMapping(value = "/timestamp-batch", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-  public List<String> signTimestampBatchWithService(@RequestParam MultipartFile[] inputFiles) {
+  public List<String> signTimestampBatch(@RequestParam MultipartFile[] inputFiles) {
     List<PdfMetadata> documents = Arrays.stream(inputFiles).map(this::toPdfMetadata).collect(Collectors.toList());
-    signingService.performSignings(documents, SignatureMode.TIMESTAMP, userData);
+    aisClient.signWithTimestamp(documents, userData);
     return documents.stream()
                     .map(document -> Base64.getEncoder().encodeToString(((ByteArrayOutputStream) document.getOutputStream()).toByteArray()))
                     .collect(Collectors.toList());
   }
 
   @PostMapping("/dynamic")
-  public SignatureResultResponse signDocumentWithService(@RequestParam String inputFilePath, @RequestParam String outputFilePath,
+  public SignatureResultResponse signDocument(@RequestParam String inputFilePath, @RequestParam String outputFilePath,
                                                          @RequestParam SignatureMode signatureMode) throws FileNotFoundException {
     PdfMetadata pdfMetadata = new PdfMetadata(new FileInputStream(inputFilePath), new FileOutputStream(outputFilePath));
-    return new SignatureResultResponse(signingService.performSignings(Collections.singletonList(pdfMetadata), signatureMode, userData));
+    return new SignatureResultResponse(ClientUtils.sign(aisClient, Collections.singletonList(pdfMetadata), signatureMode, userData));
   }
 
   private PdfMetadata toPdfMetadata(MultipartFile inputFile) {

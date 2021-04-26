@@ -6,11 +6,9 @@ import com.swisscom.ais.itext7.client.config.LogbackConfiguration;
 import com.swisscom.ais.itext7.client.impl.AisClientImpl;
 import com.swisscom.ais.itext7.client.model.UserData;
 import com.swisscom.ais.itext7.client.model.VerboseLevel;
+import com.swisscom.ais.itext7.client.rest.RestClientConfiguration;
 import com.swisscom.ais.itext7.client.rest.SignatureRestClient;
 import com.swisscom.ais.itext7.client.rest.SignatureRestClientImpl;
-import com.swisscom.ais.itext7.client.rest.config.RestClientConfiguration;
-import com.swisscom.ais.itext7.client.service.AisRequestService;
-import com.swisscom.ais.itext7.client.service.SigningService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -43,12 +41,7 @@ public class AisConfig {
 
   @Bean(destroyMethod = "close")
   public AisClient aisClient(AisClientConfiguration aisConfig, SignatureRestClient restClient) {
-    return new AisClientImpl(new AisRequestService(), aisConfig, restClient);
-  }
-
-  @Bean
-  public SigningService signingService(AisClient aisClient) {
-    return new SigningService(aisClient);
+    return new AisClientImpl(aisConfig, restClient);
   }
 
   @Bean("OnDemandUserData")
