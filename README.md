@@ -4,7 +4,7 @@
 
 or download raw video file.
 
-* todo.
+* https://github.com/SwisscomTrustServices/itext7-ais-demo/blob/main/SpringBoot_Project.mp4
 
 Note: some implementation details might differ since the video was recorded.
 
