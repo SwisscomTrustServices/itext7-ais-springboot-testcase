@@ -4,7 +4,7 @@
 
 * https://swisscom-my.sharepoint.com/:v:/p/paul_muntean/EfhlbryOl0NFuMbflmr26rsBlHU4VtW6ic0N9d1Xp0e9Aw
 
-or download raw video file.
+or alternativelly if you cannot access the first link, you need to download the raw video file using the following link.
 
 * https://github.com/SwisscomTrustServices/itext7-ais-demo/blob/main/SpringBoot_Project.mp4
 
