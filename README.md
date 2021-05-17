@@ -1,9 +1,12 @@
-# How to Test the AIS Client from this SpringBoot Project Video Demo
-https://swisscom-my.sharepoint.com/personal/paul_muntean_swisscom_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fpaul%5Fmuntean%5Fswisscom%5Fcom%2FDocuments%2FAufnahmen%2FSpring%20Boot%20Proj%2E%2C%20iText7%20client%20config%2C%20etc%2E%2D20210420%5F143922%2DBesprechungsaufzeichnung%2Emp4&parent=%2Fpersonal%2Fpaul%5Fmuntean%5Fswisscom%5Fcom%2FDocuments%2FAufnahmen&originalPath=aHR0cHM6Ly9zd2lzc2NvbS1teS5zaGFyZXBvaW50LmNvbS86djovcC9wYXVsX211bnRlYW4vRWZobGJyeU9sME5GdU1iZmxtcjI2cnNCWmswdGI2c2dwNVQyMjlXU25QckJoUT9ydGltZT1ZSWxhX2ZzRDJVZw
+# Demo Video
 
-or
+* How to Test the AIS Client from this SpringBoot Project
 
-https://swisscom-my.sharepoint.com/:v:/p/paul_muntean/EfhlbryOl0NFuMbflmr26rsBlHU4VtW6ic0N9d1Xp0e9Aw
+* https://swisscom-my.sharepoint.com/:v:/p/paul_muntean/EfhlbryOl0NFuMbflmr26rsBlHU4VtW6ic0N9d1Xp0e9Aw
+
+or alternativelly if you cannot access the first link, you need to download the raw video file using the following link.
+
+* https://github.com/SwisscomTrustServices/itext7-ais-demo/blob/main/SpringBoot_Project.mp4
 
 Note: some implementation details might differ since the video was recorded.
 
