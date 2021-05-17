@@ -1,5 +1,7 @@
 swisscom:
   ais-client:
+    # The license file path. Also, env placeholder is supported (e.g. ${AIS-PRIVATE-KEY-SECRET})
+    license.file: ${ITEXT_LICENSE_FILE_PATH}
     server:
       # The AIS server trusted CA certificate file
       cert.file: C:\\Projects\\Swisscom\\files\\ais-ca-ssl\\ais-ca-ssl.crt
