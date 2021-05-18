@@ -1,3 +1,4 @@
+
 swisscom:
   ais-client:
     # The license file path. Also, env placeholder is supported (e.g. ${AIS-PRIVATE-KEY-SECRET})
@@ -42,3 +43,5 @@ swisscom:
       claimedIdentityKey: OnDemand-Advanced
       # Specially created for this PoC
       staticClaimedIdentityKey: static-saphir4-eu
+server:
+  port: 8880

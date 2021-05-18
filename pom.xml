@@ -19,7 +19,7 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<itext7-ais.version>1.2.0</itext7-ais.version>
+		<itext7-ais.version>1.0.0</itext7-ais.version>
 	</properties>
 
 	<repositories>
