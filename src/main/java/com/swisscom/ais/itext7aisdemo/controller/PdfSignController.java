@@ -66,9 +66,10 @@ public class PdfSignController {
 
   @PostMapping("/dynamic")
   public SignatureResultResponse signDocument(@RequestParam String inputFilePath, @RequestParam String outputFilePath,
-                                                         @RequestParam SignatureMode signatureMode) throws FileNotFoundException {
+                                              @RequestParam SignatureMode signatureMode) throws FileNotFoundException {
     PdfMetadata pdfMetadata = new PdfMetadata(new FileInputStream(inputFilePath), new FileOutputStream(outputFilePath));
-    return new SignatureResultResponse(ClientUtils.sign(aisClient, Collections.singletonList(pdfMetadata), signatureMode, userData));
+    return new SignatureResultResponse(ClientUtils.sign(aisClient, Collections.singletonList(pdfMetadata), signatureMode,
+                                                        SignatureMode.STATIC.equals(signatureMode) ? staticUserData : userData));
   }
 
   private PdfMetadata toPdfMetadata(MultipartFile inputFile) {
