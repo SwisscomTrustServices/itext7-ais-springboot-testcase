@@ -1,14 +1,12 @@
-# Demo Video
+# Java based SpringBoot Video Demo
 
 * How to Test the AIS Client from this SpringBoot Project
 
+[![Watcht the video](https://i.imgur.com/sVO6l5m.png)](https://youtu.be/JI3m2NUM1f0)
+
+or see it on SharePoint:
+
 * https://swisscom-my.sharepoint.com/:v:/p/paul_muntean/EfhlbryOl0NFuMbflmr26rsBlHU4VtW6ic0N9d1Xp0e9Aw
-
-or alternativelly if you cannot access the first link, you need to download the raw video file using the following link.
-
-* https://github.com/SwisscomTrustServices/itext7-ais-demo/blob/main/SpringBoot_Project.mp4
-
-Note: some implementation details might differ since the video was recorded.
 
 # Swisscom iText7 AIS Java client demo
 
